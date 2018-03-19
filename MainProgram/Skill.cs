@@ -1,10 +1,14 @@
-﻿namespace MainProgram
+﻿using System; 
+
+namespace MainProgram
 {
     public class Skill : IAttack
     {
+        Attributes requiredAttributes;
+
         public int GetDamage()
         {
-            throw new global::System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
