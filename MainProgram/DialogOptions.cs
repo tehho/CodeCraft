@@ -22,15 +22,19 @@ namespace MainProgram
 
         public static DialogOptions CreateOptions(string question, string options)
         {
+            string[] list = options.Split("\n");
+
+            return CreateOptions(question, list);
+        }
+        public static DialogOptions CreateOptions(string question, string[] options)
+        {
             DialogOptions temp = new DialogOptions
             {
                 question = question,
                 possibleAnswers = new List<DialogOption>()
             };
 
-            List<string> list = options.Split("\n").ToList();
-
-            foreach (var item in list)
+            foreach (var item in options)
             {
                 temp.possibleAnswers.Add(new DialogOption(item));
             }

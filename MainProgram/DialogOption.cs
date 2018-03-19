@@ -4,12 +4,13 @@ using System.Linq;
 
 namespace MainProgram
 {
+
     public class DialogOption
     {
         string displayQuestion;
         List<string> options;
 
-        string Question
+        public string Question
         {
             get
             {

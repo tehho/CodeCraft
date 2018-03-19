@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MainProgram
 {
-    public class Player : Entity
+    public class Player : Character
     {
         readonly List<Item> inventory;
         Equipment[] armor;

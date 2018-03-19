@@ -17,7 +17,7 @@ namespace MainProgram
         GameState gameState;
         Player player;
 
-        readonly Dictionary<string, Input.Options> menuOptions;
+        readonly Dictionary<string, DialogOptions> menuOptions;
 
 
         bool running;
@@ -25,7 +25,7 @@ namespace MainProgram
         public Game()
         {
             gameState = GameState.Menu;
-            menuOptions = new Dictionary<string, Input.Options>();
+            menuOptions = new Dictionary<string, DialogOptions>();
         }
 
         public void Init()

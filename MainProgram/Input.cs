@@ -26,7 +26,7 @@ namespace MainProgram
             int result = 0;
             do
             {
-                string message = GetInputFromOptions(Options.CreateOptions("Are you sure?", "Yes\nNo")).ToLower();
+                string message = GetInputFromOptions(DialogOptions.CreateOptions("Are you sure?", "Yes\nNo")).ToLower();
                 switch(message)
                 {
                     case "1":
