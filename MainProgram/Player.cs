@@ -48,7 +48,6 @@ namespace MainProgram
             {
                 name = Input.GetInputWithMessage("Please enter your name:").ToCapitalize(),
                 description = Input.GetInputWithMessage("Please enter your description:"),
-                stats = new Attributes()
             };
         }
 
