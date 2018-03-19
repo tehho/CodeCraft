@@ -1,6 +1,6 @@
 ﻿namespace MainProgram
 {
-    public class NPC : Character
+    public abstract class NPC : Character
     {
         public NPC()
             : base()

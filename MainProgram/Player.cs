@@ -5,20 +5,16 @@ namespace MainProgram
 {
     public class Player : Character
     {
-        readonly List<Item> inventory;
-        Equipment[] armor;
-
-        Attributes stats;
+        
         
         public Player()
             : base()
         {
-            inventory = new List<Item>();
         }
 
         public bool PickUp(Item item)
         {
-            if (inventory.Count < AllowedMaxInventory())
+            if (inventory.Count < MAX_Inventory)
             {
                 inventory.Add(item);
                 return true;
@@ -45,12 +41,7 @@ namespace MainProgram
             }
             return false;
         }
-
-        int AllowedMaxInventory()
-        {
-            return 10 + stats.strengt;
-        }
-
+        
         public static Player CreateNewPlayer()
         {
             return new Player
@@ -64,6 +55,11 @@ namespace MainProgram
         public override string ToString()
         {
             return base.ToString();
+        }
+
+        public override void Logic()
+        {
+            throw new NotImplementedException();
         }
     }
 }

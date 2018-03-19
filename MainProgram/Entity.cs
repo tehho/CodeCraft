@@ -1,6 +1,6 @@
 ﻿namespace MainProgram
 {
-    public class Entity
+    public abstract class Entity
     {
         protected string name;
         protected string description;
