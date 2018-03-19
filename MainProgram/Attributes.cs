@@ -14,6 +14,13 @@ namespace MainProgram
             agility = rand.Next(1, 6) + rand.Next(1, 6) + rand.Next(1, 6);
         }
 
+        public Attributes(int strengt, int intellect, int agility)
+        {
+            this.strengt = strengt;
+            this.intellect = intellect;
+            this.agility = agility;
+        }
+
         public static bool operator< (Attributes attributes, Attributes other)
         {
             return attributes.strengt < other.strengt && attributes.intellect < other.intellect && attributes.agility < other.agility ;
