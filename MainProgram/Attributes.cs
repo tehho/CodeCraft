@@ -8,10 +8,7 @@ namespace MainProgram
 
         public Attributes()
         {
-            Random rand = new Random();
-            strengt = rand.Next(1, 6) + rand.Next(1, 6) + rand.Next(1, 6);
-            intellect = rand.Next(1, 6) + rand.Next(1, 6) + rand.Next(1, 6);
-            agility = rand.Next(1, 6) + rand.Next(1, 6) + rand.Next(1, 6);
+            GenerateAttributes();
         }
 
         public Attributes(int strengt, int intellect, int agility)
@@ -20,8 +17,7 @@ namespace MainProgram
             this.intellect = intellect;
             this.agility = agility;
         }
-
-
+        
 
         public void GenerateAttributes()
         {
