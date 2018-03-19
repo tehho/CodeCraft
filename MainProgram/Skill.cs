@@ -2,13 +2,10 @@
 
 namespace MainProgram
 {
-    public class Skill : IAttack
+    public abstract class Skill : IAttack
     {
-        Attributes requiredAttributes;
+        protected Attributes requiredAttributes;
 
-        public int GetDamage()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract int GetDamage();
     }
 }

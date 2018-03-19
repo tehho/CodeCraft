@@ -1,6 +1,6 @@
 ﻿namespace MainProgram
 {
-    public class Equipment : Item
+    public class Equipment : UsabelItem
     {
         int durability;
         int MAX_durability;
