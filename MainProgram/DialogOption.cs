@@ -9,6 +9,14 @@ namespace MainProgram
         string displayQuestion;
         List<string> options;
 
+        string Question
+        {
+            get
+            {
+                return displayQuestion;
+            }
+        }
+
         public DialogOption(string option)
         {
             options = new List<string>(option.Split(","));
@@ -18,6 +26,10 @@ namespace MainProgram
         public bool Check(string str)
         {
             return options.Contains(str);
+        }
+        public override string ToString()
+        {
+            return displayQuestion;
         }
     }
 }

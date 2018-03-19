@@ -145,9 +145,9 @@ namespace MainProgram
             }
         }
 
-        Input.Options GetMainMenuOptions()
+        DialogOptions GetMainMenuOptions()
         {
-            return Input.Options.CreateOptions("Main menu", "New Game\nLoad Game\nOptions\nQuit");
+            return DialogOptions.CreateOptions("Main menu", "New Game,1\nLoad Game,2\nOptions,3\nQuit,4");
         }
     }
 }

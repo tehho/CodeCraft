@@ -46,7 +46,7 @@ namespace MainProgram
             return (result == 1);
         }
         
-        public static string GetInputFromOptions(Options options)
+        public static string GetInputFromOptions(DialogOptions options)
         {
             DisplayText(options.question);
 
