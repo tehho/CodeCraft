@@ -11,7 +11,7 @@ namespace MainProgram
             requiredAttributes = new Attributes(0, 10, 0);
         }
 
-        public override int GetDamage()
+        public override double GetDamage()
         {
             return (requiredAttributes.intellect * 2.5);
         }

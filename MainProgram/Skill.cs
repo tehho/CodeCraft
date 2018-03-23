@@ -6,6 +6,6 @@ namespace MainProgram
     {
         protected Attributes requiredAttributes;
 
-        public abstract int GetDamage();
+        public abstract double GetDamage();
     }
 }

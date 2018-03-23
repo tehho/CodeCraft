@@ -5,22 +5,26 @@ namespace MainProgram
 {
     public abstract class Character : Entity
     {
-        public readonly Attributes stats;
+        public Attributes Stats
+        {
+            get => Stats;
+            set => Stats = value;
+        }
 
-        protected readonly List<Item> inventory;
-        public int MAX_Inventory { get { return 10 + stats.strengt; } }
+        protected readonly List<Item> Inventory;
+        public int MaxInventory => 10 + Stats.strengt;
 
-        protected Equipment[] armor;
-        protected Weapon weapon;
-        protected Equipment offhand;
+        protected Equipment[] Equipments;
 
-        public int MAX_Health { get { return stats.strengt * 3; } }
-        public int Health;
-        
-        public Character()
+        public int MaxHealth => Stats.strengt * 3;
+        public int Health { get; set; }
+
+        protected Character()
             : base()
         {
-            stats = new Attributes();
+            Stats = new Attributes();
+            Inventory = new List<Item>();
+            Equipments = new Equipment[14];
         }
         public abstract void Logic();
     }

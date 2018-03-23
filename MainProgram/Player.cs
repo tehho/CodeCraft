@@ -14,9 +14,9 @@ namespace MainProgram
 
         public bool PickUp(Item item)
         {
-            if (inventory.Count < MAX_Inventory)
+            if (Inventory.Count < MaxInventory)
             {
-                inventory.Add(item);
+                Inventory.Add(item);
                 return true;
             }
             return false;
@@ -24,9 +24,9 @@ namespace MainProgram
 
         public bool DropItem(Item item)
         {
-            if (inventory.Contains(item))
+            if (Inventory.Contains(item))
             {
-                inventory.Remove(item);
+                Inventory.Remove(item);
                 return true;
             }
             return false;
@@ -35,7 +35,7 @@ namespace MainProgram
 
         public bool Equip(Equipment item)
         {
-            if (item.stats < stats)
+            if (item.stats < Stats)
             {
                 return true;
             }

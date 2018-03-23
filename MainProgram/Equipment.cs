@@ -12,4 +12,22 @@
             durability = MAX_durability;
         }
     }
+
+    public enum EquipmentPosition
+    {
+        Head,
+        Shoulders,
+        Neck,
+        Back,
+        Chest,
+        Waist,
+        Legs,
+        Feet,
+        Wrists,
+        Hands,
+        MainHand,
+        OffHand,
+        Relic,
+        Trinket
+    }
 }

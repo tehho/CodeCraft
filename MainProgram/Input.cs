@@ -1,14 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace MainProgram
 {
     public static class Input
     {
-        
-
+        public static void DisplayText(object message)
+        {
+            Console.WriteLine(message);
+        }
         public static void DisplayText(string message)
         {
             Console.WriteLine(message);
+        }
+
+        public static void LogError(object obj)
+        {
+            if (Options.Debugg)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                DisplayText(obj);
+                Console.ResetColor();
+            }
         }
 
         public static void ClearScreen()
@@ -23,23 +37,23 @@ namespace MainProgram
 
         public static bool AreYouSure()
         {
-            int result = 0;
+            var result = 0;
             do
             {
-                string message = GetInputFromOptions(DialogOptions.CreateOptions("Are you sure?", "Yes\nNo")).ToLower();
+                var message = GetInputFromOptions(DialogOptions.AreYouSure()).ToLower();
                 switch(message)
                 {
-                    case "1":
                     case "yes":
                         result = 1;
                         break;
-                    case "2":
                     case "no":
                         result = 2;
                         break;
                     default:
+                        result = 3;
                         break;
                 }
+                
             }
             while (result != 1 && result != 2);
 
@@ -48,16 +62,45 @@ namespace MainProgram
         
         public static string GetInputFromOptions(DialogOptions options)
         {
-            DisplayText(options.question);
-
-            Seperator();
-
-            for (int i = 0; i < options.possibleAnswers.Count; i++)
+            while (true)
             {
-                DisplayText($"{i + 1}. {options.possibleAnswers[i]}");
-            }
+                DisplayText(options.Question);
 
-            return GetInput();
+                Seperator();
+
+                List<DialogOption> possibleAnswers = options.PossibleAnswers;
+
+                for (int i = 0; i < possibleAnswers.Count; i++)
+                {
+                    DisplayText($"{i + 1}. {possibleAnswers[i]}");
+                }
+
+                var input = GetInput();
+
+                for (int i = 0; i < possibleAnswers.Count; i++)
+                {
+                    if (input == (i+1).ToString())
+                        return possibleAnswers[i].Answer;
+
+                    if (possibleAnswers[i].Check(input))
+                        return possibleAnswers[i].Answer;
+                }
+
+                try
+                {
+                    return options.Check(input);
+                }
+                catch (ArgumentException ae)
+                {
+                    DisplayText("That's not a vaild option!");
+                    if (Options.Debugg)
+                    {
+                        LogError(ae);
+                    }
+                }
+
+                DisplayText("");
+            }
         }
 
         public static string GetInputWithMessage(string message)
