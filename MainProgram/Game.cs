@@ -77,10 +77,17 @@ namespace MainProgram
 
             foreach (var location in list)
             {
-                _locations.Add(location.Key, location.Value);
+                try
+                {
+                    _locations.Add(location.Key, location.Value);
+                }
+                catch (Exception e)
+                {
+                    Input.LogError(e);
+                }
             }
 
-            ((OneWayLocation)_locations["newgame"]).Parent = list["testville"];
+            ((OneWayLocation)_locations["newgame"]).Parent = _locations["testville"];
             
         }
 

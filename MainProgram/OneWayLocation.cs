@@ -14,7 +14,10 @@ namespace MainProgram
             set
             {
                 Locations.Add(value);
-                Locations.RemoveAt(0);
+                while (Locations.Count > 1)
+                {
+                    Locations.RemoveAt(0);
+                }
             }
         }
 
