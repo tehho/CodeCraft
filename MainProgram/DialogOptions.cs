@@ -10,6 +10,29 @@ namespace MainProgram
         public string Question;
         public List<DialogOption> PossibleAnswers;
 
+        public DialogOptions()
+        {
+            Question = "";
+            PossibleAnswers = new List<DialogOption>();
+        }
+
+        public DialogOptions(string question)
+        {
+            Question = question;
+            PossibleAnswers = new List<DialogOption>();
+        }
+
+        public DialogOptions(string question, params string [] list)
+        {
+            Question = question;
+            PossibleAnswers = new List<DialogOption>();
+
+            foreach (var option in list)
+            {
+                PossibleAnswers.Add(new DialogOption(option));
+            }
+        }
+
         public string Check(string str)
         {
             foreach (var possibleAnswer in PossibleAnswers)

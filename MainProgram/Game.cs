@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 using System.Xml.Linq;
 
 namespace MainProgram
@@ -11,7 +12,9 @@ namespace MainProgram
 
         private readonly Dictionary<string, Location> _locations;
         private Location _currenLocation;
-        
+
+        public delegate string Enter();
+
         private bool _running;
 
         public Game()
@@ -21,18 +24,11 @@ namespace MainProgram
 
         public void Init()
         {
-            _locations.Add("newgame", new OneWayLocation(null, "New Game", "Creates a new game", CreateTestWorld));
-            _locations.Add("loadgame", new MultiWayLocation(null, "Load Game", "Load Game", "What do you want to do?", "Continue last save,Continue", "Load from save,save,load"));
+            _locations.Add("menu", new Location("Main Menu", "The main menu of CodeCraft"));
+            _locations.Add("newgame", new Location("New Game", "Starts a new game!"));
 
 
-            LoadOptions();
-            
-            _locations.Add("quit", new OneWayLocation(null, "Quit", "Quiting the game", Quit));
-            
-            LoadMenu();
-
-            _currenLocation = _locations["menu"];
-
+            _locations["menu"].AddLocation(_locations["newgame"], "newgame");
         }
 
         public void Run()
@@ -45,8 +41,8 @@ namespace MainProgram
             {
                 try
                 {
-                    _currenLocation = _currenLocation.Enter();
-                    
+                    _currenLocation = _currenLocation.Enter() ?? _locations["menu"];
+
                     Input.ClearScreen();
                 }
                 catch (Exception e)
@@ -56,7 +52,7 @@ namespace MainProgram
                 }
             }
         }
-
+        /*
         public void CreateTestWorld()
         {
             var list = new Dictionary<string, Location>();
@@ -90,7 +86,6 @@ namespace MainProgram
             ((OneWayLocation)_locations["newgame"]).Parent = _locations["testville"];
             
         }
-
         public void LoadMenu()
         {
             var list = new List<Location>()
@@ -106,7 +101,6 @@ namespace MainProgram
             ((MultiWayLocation)_locations["options"]).AddLocation(_locations["menu"],"Return");
             ((OneWayLocation) _locations["quit"]).Parent = _locations["menu"];
         }
-
         public void LoadOptions()
         {
             var option = new MultiWayLocation(null, "Options", "Options", "What do you want to do?");
@@ -124,7 +118,7 @@ namespace MainProgram
 
             _locations.Add("options", option);
         }
-
+        */
         private void NewGame()
         {
             _player = Player.CreateNewPlayer();
