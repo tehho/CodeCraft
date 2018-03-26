@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 namespace MainProgram
 {
-    public abstract class Location : Entity
+    public class Location : Entity
     {
+        public delegate void EnterHandler();
+
         protected readonly List<Location> Locations;
 
         protected Location(List<Location> locations, string name, string description)
@@ -16,7 +18,7 @@ namespace MainProgram
         /// Returns a new Location upon entering a correct option.
         /// </summary>
         /// <returns></returns>
-        public abstract Location Enter();
+        public EnterHandler Enter;
 
     }
 }
