@@ -46,8 +46,8 @@ namespace MainProgram
         {
             return new Player
             {
-                name = Input.GetInputWithMessage("Please enter your name:").ToCapitalize(),
-                description = Input.GetInputWithMessage("Please enter your description:"),
+                Name = Input.GetInputWithMessage("Please enter your name:").ToCapitalize(),
+                Description = Input.GetInputWithMessage("Please enter your description:"),
             };
         }
 

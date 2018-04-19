@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using log4net;
 
 namespace MainProgram
 {
@@ -10,32 +8,37 @@ namespace MainProgram
     {
         public delegate Location EnterHandler();
 
-        private readonly List<Location> Locations;
-        private readonly DialogOptions options;
-
-
+        public List<Location> _locations { get; private set; }
+        private readonly DialogOptions _options;
+        private readonly Location _parent;
 
         public EnterHandler Enter;
 
-        public Location(List<Location> locations, string name, string description)
+        public Location(List<Location> locations, string name, string description, Location parent, params EnterHandler[] events)
             : base(name, description)
         {
-            Locations = locations ?? new List<Location>();
-            Enter += Display;
-            Enter += Logic;
+            _parent = parent;
+            _locations = locations ?? new List<Location>();
+            _options = new DialogOptions("What do you want to do?");
+
+            foreach (var e in events)
+            {
+                Enter += e;
+            }
+
+             
+            Enter += () => _parent;
 
         }
-        public Location(string name, string description)
-            : base(name, description)
+
+        public Location(string name, string description, Location parent, params EnterHandler[] events)
+            : this(null, name, description, parent, events)
         {
-            Locations = new List<Location>();
-            options = new DialogOptions("What do you want to do?");
-            Enter += Display;
-            Enter += () =>
-            {
-                Enter += Logic;
-                return null;
-            };
+        }
+
+        public void AddInput()
+        {
+            Enter += Logic;
         }
 
 
@@ -46,16 +49,9 @@ namespace MainProgram
 
         public void AddLocation(Location location, string option = "")
         {
-            Locations.Add(location);
+            _locations.Add(location);
 
-            var temp = location.Name;
-
-            if (!string.IsNullOrWhiteSpace(option))
-            {
-                temp += "," + option;
-            }
-
-            options.AddDialogOption(new DialogOption(temp));
+            _options.AddDialogOption(new DialogOption(location.Name + "," + option));
         }
         public void AddLocation(Location location, params string[] option)
         {
@@ -70,15 +66,14 @@ namespace MainProgram
 
         public Location Logic()
         {
-            var input = Input.GetInputFromOptions(options);
+            var input = Input.GetInputFromOptions(_options);
 
-            var list = Locations.Where((item) => item.Name == input).ToList();
+            var list = _locations.Where((item) => item.Name == input).ToList();
 
             if (list.Count == 0)
                 throw new ArgumentException("Input not valid!", nameof(input));
 
             return list[0];
-
         }
 
     }
